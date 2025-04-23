@@ -11,12 +11,14 @@ import (
 type Client struct {
 	Rest *rest.ClientRest
 	Ws   *ws.ClientWs
+	BWs  *ws.ClientWs
 	ctx  context.Context
 }
 
 // NewClient returns a pointer to a fresh Client
 func NewClient(ctx context.Context, apiKey, secretKey, passphrase string, destination okex.Destination) (*Client, error) {
 	restURL := okex.RestURL
+	busWsURL := okex.BusinessWsURL
 	wsPubURL := okex.PublicWsURL
 	wsPriURL := okex.PrivateWsURL
 	switch destination {
@@ -32,6 +34,6 @@ func NewClient(ctx context.Context, apiKey, secretKey, passphrase string, destin
 
 	r := rest.NewClient(apiKey, secretKey, passphrase, restURL, destination)
 	c := ws.NewClient(ctx, apiKey, secretKey, passphrase, map[bool]okex.BaseURL{true: wsPriURL, false: wsPubURL})
-
-	return &Client{r, c, ctx}, nil
+	bc := ws.NewClient(ctx, apiKey, secretKey, passphrase, map[bool]okex.BaseURL{true: wsPriURL, false: busWsURL})
+	return &Client{r, c, bc, ctx}, nil
 }
