@@ -24,10 +24,12 @@ func NewClient(ctx context.Context, apiKey, secretKey, passphrase string, destin
 	switch destination {
 	case okex.AwsServer:
 		restURL = okex.AwsRestURL
+		busWsURL = okex.AwsBusinessWsURL
 		wsPubURL = okex.AwsPublicWsURL
 		wsPriURL = okex.AwsPrivateWsURL
 	case okex.DemoServer:
 		restURL = okex.DemoRestURL
+		busWsURL = okex.DemoBusinessWsURL
 		wsPubURL = okex.DemoPublicWsURL
 		wsPriURL = okex.DemoPrivateWsURL
 	}

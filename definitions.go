@@ -67,13 +67,15 @@ const (
 	PublicWsURL   = BaseURL("wss://ws.okx.com:8443/ws/v5/public")
 	PrivateWsURL  = BaseURL("wss://ws.okx.com:8443/ws/v5/private")
 
-	AwsRestURL      = BaseURL("https://aws.okx.com")
-	AwsPublicWsURL  = BaseURL("wss://wsaws.okx.com:8443/ws/v5/public")
-	AwsPrivateWsURL = BaseURL("wss://wsaws.okx.com:8443/ws/v5/private")
+	AwsRestURL       = BaseURL("https://aws.okx.com")
+	AwsBusinessWsURL = BaseURL("wss://wsaws.okx.com:8443/ws/v5/business")
+	AwsPublicWsURL   = BaseURL("wss://wsaws.okx.com:8443/ws/v5/public")
+	AwsPrivateWsURL  = BaseURL("wss://wsaws.okx.com:8443/ws/v5/private")
 
-	DemoRestURL      = BaseURL("https://www.okx.com")
-	DemoPublicWsURL  = BaseURL("wss://wspap.okx.com:8443/ws/v5/public?brokerId=9999")
-	DemoPrivateWsURL = BaseURL("wss://wspap.okx.com:8443/ws/v5/private?brokerId=9999")
+	DemoRestURL       = BaseURL("https://www.okx.com")
+	DemoBusinessWsURL = BaseURL("wss://wspap.okx.com:8443/ws/v5/business?brokerId=9999")
+	DemoPublicWsURL   = BaseURL("wss://wspap.okx.com:8443/ws/v5/public?brokerId=9999")
+	DemoPrivateWsURL  = BaseURL("wss://wspap.okx.com:8443/ws/v5/private?brokerId=9999")
 
 	SpotInstrument    = InstrumentType("SPOT")
 	MarginInstrument  = InstrumentType("MARGIN")
