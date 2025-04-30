@@ -63,7 +63,7 @@ const (
 	DemoServer
 
 	RestURL       = BaseURL("https://www.okx.com")
-	BusinessWsURL = BaseURL("wss://wspap.okx.com:8443/ws/v5/business")
+	BusinessWsURL = BaseURL("wss://ws.okx.com:8443/ws/v5/business")
 	PublicWsURL   = BaseURL("wss://ws.okx.com:8443/ws/v5/public")
 	PrivateWsURL  = BaseURL("wss://ws.okx.com:8443/ws/v5/private")
 
