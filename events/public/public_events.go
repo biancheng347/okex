@@ -19,14 +19,11 @@ type (
 		Arg           *events.Argument           `json:"arg"`
 		OpenInterests []*publicdata.OpenInterest `json:"data"`
 	}
-	//Candlesticks struct {
-	//	Arg     *events.Argument `json:"arg"`
-	//	Candles []*market.Candle `json:"data"`
-	//}
 	Candlesticks struct {
-		Arg     map[string]string `json:"arg"`
-		Candles [][]string        `json:"data"`
+		Arg     *events.Argument `json:"arg"`
+		Candles []*market.Candle `json:"data"`
 	}
+
 	Trades struct {
 		Arg    *events.Argument `json:"arg"`
 		Trades []*market.Trade  `json:"data"`

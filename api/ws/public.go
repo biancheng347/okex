@@ -530,6 +530,7 @@ func (c *Public) Process(data []byte, e *events.Basic) bool {
 				if err := json.Unmarshal(data, &e); err != nil {
 					return false
 				}
+
 				if c.cCh != nil {
 					c.cCh <- &e
 				}
