@@ -2,11 +2,12 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"github.com/biancheng347/okex"
 	"github.com/biancheng347/okex/api"
 	"github.com/biancheng347/okex/events"
-	"github.com/biancheng347/okex/events/public"
-	ws_public_requests "github.com/biancheng347/okex/requests/ws/public"
+	"github.com/biancheng347/okex/events/private"
+	ws_private_requests "github.com/biancheng347/okex/requests/ws/private"
 	"log"
 )
 
@@ -29,17 +30,30 @@ func main() {
 	sucChan := make(chan *events.Success)
 	client.BWs.SetChannels(errChan, subChan, uSubChan, logChan, sucChan)
 
-	cCh := make(chan *public.Candlesticks)
-	err = client.BWs.Public.Candlesticks(ws_public_requests.Candlesticks{
-		InstID:  "BTC-USDT-SWAP",
-		Channel: okex.CandleStick5m,
-	}, cCh)
+	//cCh := make(chan *public.Candlesticks)
+	//err = client.BWs.Public.Candlesticks(ws_public_requests.Candlesticks{
+	//	InstID:  "BTC-USDT-SWAP",
+	//	Channel: okex.CandleStick5m,
+	//}, cCh)
 
 	//err = client.BWs.Public.Candlesticks(ws_public_requests.Candlesticks{
 	//	InstID:  "ETH-USDT-SWAP",
 	//	Channel: okex.CandleStick5m,
 	//}, cCh)
 
+	pCh := make(chan *private.Position)
+
+	data := map[string]string{
+		"updateInterval": "2000",
+	}
+	jsonData, _ := json.MarshalIndent(data, "", "    ") // 使用缩进格式化
+	extra := string(jsonData)
+
+	err = client.BWs.Private.PositionExtra(ws_private_requests.PositionExtra{
+		InstID:      "BTC-USDT-SWAP",
+		InstType:    "SWAP",
+		ExtraParams: extra,
+	}, pCh)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -61,14 +75,17 @@ func main() {
 			for _, datum := range err.Data {
 				log.Printf("[Error]\t\t%+v", datum)
 			}
-
-		case c := <-cCh:
-			instId, ok := c.Arg.Get("instId")
-			if ok {
-				for _, candle := range c.Candles {
-					log.Printf("[Candlesticks: %s]\t%+v", instId, candle)
-				}
+		case p := <-pCh:
+			for _, position := range p.Positions {
+				log.Printf("[Position]\t%+v", position)
 			}
+		//case c := <-cCh:
+		//	instId, ok := c.Arg.Get("instId")
+		//	if ok {
+		//		for _, candle := range c.Candles {
+		//			log.Printf("[Candlesticks: %s]\t%+v", instId, candle)
+		//		}
+		//	}
 		case b := <-client.Ws.DoneChan:
 			log.Printf("[End]:\t%v", b)
 			return

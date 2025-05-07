@@ -11,6 +11,12 @@ type (
 		InstID   string              `json:"instId,omitempty"`
 		InstType okex.InstrumentType `json:"instType"`
 	}
+	PositionExtra struct {
+		Uly         string              `json:"uly,omitempty"`
+		InstID      string              `json:"instId,omitempty"`
+		InstType    okex.InstrumentType `json:"instType"`
+		ExtraParams string              `json:"extraParams,omitempty"`
+	}
 	Order struct {
 		Uly      string              `json:"uly,omitempty"`
 		InstID   string              `json:"instId,omitempty"`

@@ -59,10 +59,26 @@ func (c *Private) Position(req requests.Position, ch ...chan *private.Position) 
 	return c.Subscribe(true, []okex.ChannelName{"positions"}, m)
 }
 
+func (c *Private) PositionExtra(req requests.PositionExtra, ch ...chan *private.Position) error {
+	m := okex.S2M(req)
+	if len(ch) > 0 {
+		c.pCh = ch[0]
+	}
+	return c.Subscribe(true, []okex.ChannelName{"positions"}, m)
+}
+
 // UPosition
 //
 // https://www.okex.com/docs-v5/en/#websocket-api-private-channel-positions-channel
 func (c *Private) UPosition(req requests.Position, rCh ...bool) error {
+	m := okex.S2M(req)
+	if len(rCh) > 0 && rCh[0] {
+		c.pCh = nil
+	}
+	return c.Unsubscribe(true, []okex.ChannelName{"positions"}, m)
+}
+
+func (c *Private) UPositionExtra(req requests.PositionExtra, rCh ...bool) error {
 	m := okex.S2M(req)
 	if len(rCh) > 0 && rCh[0] {
 		c.pCh = nil
