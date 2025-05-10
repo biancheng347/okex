@@ -25,6 +25,13 @@ type (
 		SMsg    string           `json:"sMsg"`
 		SCode   okex.JSONFloat64 `json:"sCode"`
 	}
+	AmendAlgo struct {
+		AlgoClOrdId string           `json:"algoClOrdId"`
+		AlgoId      string           `json:"algoId"`
+		ReqId       string           `json:"reqId"`
+		SMsg        string           `json:"sMsg"`
+		SCode       okex.JSONFloat64 `json:"sCode"`
+	}
 	ClosePosition struct {
 		InstID  string            `json:"instId"`
 		PosSide okex.PositionSide `json:"posSide"`
