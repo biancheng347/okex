@@ -136,10 +136,9 @@ func (c *ClientRest) sign(method, path, body string) (string, string) {
 	return ts, base64.StdEncoding.EncodeToString(h.Sum(nil))
 }
 
-func (c *ClientRest) RawRequest(url, method string, private bool, req map[string]any) (resp any, err error) {
-	p := url
+func RawRequest[T any](c *ClientRest, url, method string, private bool, req map[string]any) (resp T, err error) {
 	m := okex.S2M(req)
-	res, err := c.Do(method, p, private, m)
+	res, err := c.Do(method, url, private, m)
 	if err != nil {
 		return
 	}
