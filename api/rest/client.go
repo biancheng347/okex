@@ -10,6 +10,7 @@ import (
 	"github.com/biancheng347/okex"
 	requests "github.com/biancheng347/okex/requests/rest/public"
 	responses "github.com/biancheng347/okex/responses/public_data"
+	"io/ioutil"
 	"net/http"
 	"strings"
 	"time"
@@ -136,14 +137,18 @@ func (c *ClientRest) sign(method, path, body string) (string, string) {
 	return ts, base64.StdEncoding.EncodeToString(h.Sum(nil))
 }
 
-func RawRequest[T any](c *ClientRest, url, method string, private bool, req map[string]any) (resp T, err error) {
+func RawRequest[T any](c *ClientRest, url, method string, private bool, req map[string]any) (resp *T, err error) {
 	m := okex.S2M(req)
 	res, err := c.Do(method, url, private, m)
 	if err != nil {
 		return
 	}
 	defer res.Body.Close()
-	d := json.NewDecoder(res.Body)
-	err = d.Decode(resp)
+
+	resBuff, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return nil, err
+	}
+	err = json.Unmarshal(resBuff, &resp)
 	return
 }
