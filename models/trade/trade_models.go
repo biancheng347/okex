@@ -4,6 +4,12 @@ import (
 	"github.com/biancheng347/okex"
 )
 
+type OkxResp[T any] struct {
+	Code string `json:"code"`
+	Data T      `json:"data"`
+	Msg  string `json:"msg"`
+}
+
 type (
 	PlaceOrder struct {
 		ClOrdID string           `json:"clOrdId"`
