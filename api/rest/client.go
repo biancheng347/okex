@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/biancheng347/okex"
+	"github.com/biancheng347/okex/models/trade"
 	requests "github.com/biancheng347/okex/requests/rest/public"
 	responses "github.com/biancheng347/okex/responses/public_data"
 	"io/ioutil"
@@ -140,9 +141,18 @@ func (c *ClientRest) sign(method, path, body string) (string, string) {
 func RawRequest[T any](c *ClientRest, url, method string, private bool, req map[string]any) (resp *T, err error) {
 	resBuff, err := rawRequestBase(c, url, method, private, req)
 	if err != nil {
-		return nil, err
+		return
 	}
-	err = json.Unmarshal(resBuff, &resp)
+	var r *trade.OkxResp[*T]
+	err = json.Unmarshal(resBuff, &r)
+	if err != nil {
+		return
+	}
+	if r == nil || r.Code != "0" {
+		return nil, fmt.Errorf("error: %s", r.Msg)
+	}
+
+	resp = r.Data
 	return
 }
 
@@ -151,7 +161,16 @@ func RawRequestArray[T any](c *ClientRest, url, method string, private bool, req
 	if err != nil {
 		return nil, err
 	}
-	err = json.Unmarshal(resBuff, &resp)
+	var r *trade.OkxResp[[]T]
+	err = json.Unmarshal(resBuff, &r)
+	if err != nil {
+		return
+	}
+	if r == nil || r.Code != "0" {
+		return nil, fmt.Errorf("error: %s", r.Msg)
+	}
+
+	resp = r.Data
 	return
 }
 
