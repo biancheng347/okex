@@ -138,6 +138,24 @@ func (c *ClientRest) sign(method, path, body string) (string, string) {
 }
 
 func RawRequest[T any](c *ClientRest, url, method string, private bool, req map[string]any) (resp *T, err error) {
+	resBuff, err := rawRequestBase(c, url, method, private, req)
+	if err != nil {
+		return nil, err
+	}
+	err = json.Unmarshal(resBuff, &resp)
+	return
+}
+
+func RawRequestArray[T any](c *ClientRest, url, method string, private bool, req map[string]any) (resp []T, err error) {
+	resBuff, err := rawRequestBase(c, url, method, private, req)
+	if err != nil {
+		return nil, err
+	}
+	err = json.Unmarshal(resBuff, &resp)
+	return
+}
+
+func rawRequestBase(c *ClientRest, url, method string, private bool, req map[string]any) (resBuff []byte, err error) {
 	m := okex.S2M(req)
 	res, err := c.Do(method, url, private, m)
 	if err != nil {
@@ -145,10 +163,6 @@ func RawRequest[T any](c *ClientRest, url, method string, private bool, req map[
 	}
 	defer res.Body.Close()
 
-	resBuff, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		return nil, err
-	}
-	err = json.Unmarshal(resBuff, &resp)
+	resBuff, err = ioutil.ReadAll(res.Body)
 	return
 }
