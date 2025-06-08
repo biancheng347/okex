@@ -234,6 +234,20 @@ func (c *Trade) PlaceAlgoOrder(req requests.PlaceAlgoOrder) (response responses.
 	return
 }
 
+func (c *Trade) PlaceAlgoOrder1(req requests.PlaceAlgoOrder1) (response responses.PlaceAlgoOrder, err error) {
+	p := "/api/v5/trade/order-algo"
+	m := okex.S2M(req)
+	res, err := c.client.Do(http.MethodPost, p, true, m)
+	if err != nil {
+		return
+	}
+	defer res.Body.Close()
+	d := json.NewDecoder(res.Body)
+	err = d.Decode(&response)
+
+	return
+}
+
 // CancelAlgoOrder
 // Cancel unfilled algo orders(trigger order, oco order, conditional order). A maximum of 10 orders can be canceled at a time. Request parameters should be passed in the form of an array.
 //
