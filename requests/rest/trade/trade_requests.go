@@ -91,7 +91,7 @@ type (
 		Sz         string             `json:"sz,string"`
 		ReduceOnly bool               `json:"reduceOnly,omitempty"`
 		TgtCcy     okex.QuantityType  `json:"tgtCcy,omitempty"`
-		StopOrder
+		StopOrder1
 		TriggerOrder
 		IcebergOrder
 		TWAPOrder
@@ -101,6 +101,13 @@ type (
 		TpOrdPx     float64 `json:"tpOrdPx,string,omitempty"`
 		SlTriggerPx float64 `json:"slTriggerPx,string,omitempty"`
 		SlOrdPx     float64 `json:"slOrdPx,string,omitempty"`
+	}
+
+	StopOrder1 struct {
+		TpTriggerPx string `json:"tpTriggerPx,string,omitempty"`
+		TpOrdPx     string `json:"tpOrdPx,string,omitempty"`
+		SlTriggerPx string `json:"slTriggerPx,string,omitempty"`
+		SlOrdPx     string `json:"slOrdPx,string,omitempty"`
 	}
 	TriggerOrder struct {
 		TriggerPx float64 `json:"triggerPx,string,omitempty"`
