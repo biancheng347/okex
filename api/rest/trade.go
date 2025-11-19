@@ -236,7 +236,7 @@ func (c *Trade) PlaceAlgoOrder(req requests.PlaceAlgoOrder) (response responses.
 
 func (c *Trade) PlaceAlgoOrder1(req requests.PlaceAlgoOrder1) (response responses.PlaceAlgoOrder, err error) {
 	p := "/api/v5/trade/order-algo"
-	m := okex.S2M(req)
+	m := okex.S2M1(req)
 	res, err := c.client.Do(http.MethodPost, p, true, m)
 	if err != nil {
 		return

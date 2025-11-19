@@ -5,6 +5,7 @@ package okex
 
 import (
 	"encoding/json"
+	"github.com/gogf/gf/v2/util/gconv"
 	"strconv"
 	"strings"
 	"time"
@@ -467,4 +468,16 @@ func S2M(i interface{}) map[string]string {
 	_ = json.Unmarshal(j, &m)
 
 	return m
+}
+
+func S2M1(i interface{}) map[string]string {
+	m := make(map[string]any)
+	j, _ := json.Marshal(i)
+	_ = json.Unmarshal(j, &m)
+
+	mstr := make(map[string]string)
+	for k, v := range m {
+		mstr[k] = gconv.String(v)
+	}
+	return mstr
 }
