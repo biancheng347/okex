@@ -82,32 +82,39 @@ type (
 		TWAPOrder
 	}
 	PlaceAlgoOrder1 struct {
-		InstID     string             `json:"instId"`
-		TdMode     okex.TradeMode     `json:"tdMode"`
-		Ccy        string             `json:"ccy,omitempty"`
-		Side       okex.OrderSide     `json:"side"`
-		PosSide    okex.PositionSide  `json:"posSide,omitempty"`
-		OrdType    okex.AlgoOrderType `json:"ordType"`
-		Sz         string             `json:"sz,string"`
-		ReduceOnly bool               `json:"reduceOnly,omitempty"`
-		TgtCcy     okex.QuantityType  `json:"tgtCcy,omitempty"`
-		StopOrder1
+		InstID         string             `json:"instId"`
+		TdMode         okex.TradeMode     `json:"tdMode"`
+		Ccy            string             `json:"ccy,omitempty"`
+		Side           okex.OrderSide     `json:"side"`
+		PosSide        okex.PositionSide  `json:"posSide,omitempty"`
+		OrdType        okex.AlgoOrderType `json:"ordType"`
+		Sz             string             `json:"sz,string"`
+		ReduceOnly     bool               `json:"reduceOnly,omitempty"`
+		TgtCcy         okex.QuantityType  `json:"tgtCcy,omitempty"`
+		AttachAlgoOrds []AttachAlgoOrds   `json:"attach_algo_ords,omitempty"`
 		TriggerOrder
 		IcebergOrder
 		TWAPOrder
+	}
+
+	AttachAlgoOrds struct {
+		AttachAlgoId         string `json:"attachAlgoId"`
+		AttachAlgoClOrdId    string `json:"attachAlgoClOrdId"`
+		TtpOrdKind           string `json:"ttpOrdKind"`
+		TpTriggerPx          string `json:"tpTriggerPx,omitempty"`
+		TpOrdPx              string `json:"tpOrdPx,omitempty"`
+		SlTriggerPx          string `json:"slTriggerPx,omitempty"`
+		SlOrdPx              string `json:"slOrdPx,omitempty"`
+		TpTriggerPxType      string `json:"tpTriggerPxType,omitempty"`
+		SlTriggerPxType      string `json:"slTriggerPxType,omitempty"`
+		Sz                   string `json:"sz,omitempty"`
+		AmendPxOnTriggerType string `json:"amendPxOnTriggerType,omitempty"`
 	}
 	StopOrder struct {
 		TpTriggerPx float64 `json:"tpTriggerPx,string,omitempty"`
 		TpOrdPx     float64 `json:"tpOrdPx,string,omitempty"`
 		SlTriggerPx float64 `json:"slTriggerPx,string,omitempty"`
 		SlOrdPx     float64 `json:"slOrdPx,string,omitempty"`
-	}
-
-	StopOrder1 struct {
-		TpTriggerPx string `json:"tpTriggerPx,string,omitempty"`
-		TpOrdPx     string `json:"tpOrdPx,string,omitempty"`
-		SlTriggerPx string `json:"slTriggerPx,string,omitempty"`
-		SlOrdPx     string `json:"slOrdPx,string,omitempty"`
 	}
 	TriggerOrder struct {
 		TriggerPx float64 `json:"triggerPx,string,omitempty"`
