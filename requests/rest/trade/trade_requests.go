@@ -88,7 +88,7 @@ type (
 		Side           okex.OrderSide     `json:"side"`
 		PosSide        okex.PositionSide  `json:"posSide,omitempty"`
 		OrdType        okex.AlgoOrderType `json:"ordType"`
-		Sz             float64            `json:"sz,omitempty"`
+		Sz             float64            `json:"sz,string"`
 		ReduceOnly     bool               `json:"reduceOnly,omitempty"`
 		TgtCcy         okex.QuantityType  `json:"tgtCcy,omitempty"`
 		AttachAlgoOrds []AttachAlgoOrds   `json:"attach_algo_ords,omitempty"`
