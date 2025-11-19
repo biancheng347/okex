@@ -92,9 +92,9 @@ type (
 		ReduceOnly     bool               `json:"reduceOnly,omitempty"`
 		TgtCcy         okex.QuantityType  `json:"tgtCcy,omitempty"`
 		AttachAlgoOrds []AttachAlgoOrds   `json:"attachAlgoOrds,omitempty"`
-		TriggerOrder
-		IcebergOrder
-		TWAPOrder
+		//TriggerOrder
+		//IcebergOrder
+		//TWAPOrder
 	}
 
 	AttachAlgoOrds struct {
