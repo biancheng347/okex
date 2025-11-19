@@ -91,7 +91,7 @@ type (
 		Sz             float64            `json:"sz,string"`
 		ReduceOnly     bool               `json:"reduceOnly,omitempty"`
 		TgtCcy         okex.QuantityType  `json:"tgtCcy,omitempty"`
-		AttachAlgoOrds []AttachAlgoOrds   `json:"attach_algo_ords,omitempty"`
+		AttachAlgoOrds []AttachAlgoOrds   `json:"attachAlgoOrds,omitempty"`
 		TriggerOrder
 		IcebergOrder
 		TWAPOrder
