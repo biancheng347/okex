@@ -97,6 +97,22 @@ type (
 		//TWAPOrder
 	}
 
+	PlaceAlgoOrder2 struct {
+		InstID      string             `json:"instId"`
+		TdMode      okex.TradeMode     `json:"tdMode"`
+		Ccy         string             `json:"ccy,omitempty"`
+		Side        okex.OrderSide     `json:"side"`
+		PosSide     okex.PositionSide  `json:"posSide,omitempty"`
+		OrdType     okex.AlgoOrderType `json:"ordType"`
+		Sz          string             `json:"sz,omitempty"`
+		ReduceOnly  bool               `json:"reduceOnly,omitempty"`
+		TgtCcy      okex.QuantityType  `json:"tgtCcy,omitempty"`
+		TpTriggerPx float64            `json:"tpTriggerPx,string,omitempty"`
+		TpOrdPx     float64            `json:"tpOrdPx,string,omitempty"`
+		SlTriggerPx float64            `json:"slTriggerPx,string,omitempty"`
+		SlOrdPx     float64            `json:"slOrdPx,string,omitempty"`
+	}
+
 	AttachAlgoOrds struct {
 		AttachAlgoId         string `json:"attachAlgoId"`
 		AttachAlgoClOrdId    string `json:"attachAlgoClOrdId"`
