@@ -280,6 +280,22 @@ func (c *Trade) CancelAlgoOrder(req requests.CancelAlgoOrder) (response response
 
 	return
 }
+func (c *Trade) CancelAlgoOrder1(req []requests.CancelAlgoOrder) (response responses.CancelAlgoOrder, err error) {
+	p := "/api/v5/trade/cancel-algos"
+	ms := make([]map[string]string, 0, len(req))
+	for _, r := range req {
+		ms = append(ms, okex.S2M(r))
+	}
+
+	res, err := c.client.Do(http.MethodPost, p, true, ms...)
+	if err != nil {
+		return
+	}
+	defer res.Body.Close()
+
+	err = json.NewDecoder(res.Body).Decode(&response)
+	return
+}
 
 // CancelAdvanceAlgoOrder
 // Cancel unfilled algo orders(iceberg order and twap order). A maximum of 10 orders can be canceled at a time. Request parameters should be passed in the form of an array.
