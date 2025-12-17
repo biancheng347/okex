@@ -287,7 +287,7 @@ func (c *Trade) CancelAlgoOrder1(req []requests.CancelAlgoOrder) (response respo
 		ms = append(ms, okex.S2M(r))
 	}
 
-	res, err := c.client.Do(http.MethodPost, p, true, ms...)
+	res, err := c.client.DoJSON(http.MethodPost, p, true, ms)
 	if err != nil {
 		return
 	}

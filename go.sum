@@ -2,6 +2,12 @@ github.com/biancheng347/okex v1.1.4-alpha h1:dnn14GAUxi0W2yNxL2GERZTZ/iAUkCBnAbV
 github.com/biancheng347/okex v1.1.4-alpha/go.mod h1:ngcGmYzAiBKg18umdZqBDM8aluy3Q0gJMGSyeLo1XHA=
 github.com/gogf/gf/v2 v2.9.5 h1:1scfOdHbMP854oQaiLejl+eL+c4xfuvtWmmZiDJxbKs=
 github.com/gogf/gf/v2 v2.9.5/go.mod h1:VUb5eyJKpvW77O/dXsbbLNO/Kjrg0UycIiq0lRiBjjo=
+github.com/gogf/gf/v2 v2.9.6 h1:fQ6uPtS1Ra8qY+OuzPPZTlgksJ4eOXmTZ1/a2l3Idog=
+github.com/gogf/gf/v2 v2.9.6/go.mod h1:Svl1N+E8G/QshU2DUbh/3J/AJauqCgUnxHurXWR4Qx0=
 github.com/gorilla/websocket v1.4.2 h1:+/TMaTYc4QFitKJxsQ7Yye35DkWvkdLcvGKqM+x0Ufc=
 github.com/gorilla/websocket v1.4.2/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
 github.com/gorilla/websocket v1.5.3/go.mod h1:YR8l580nyteQvAITg2hZ9XVh4b55+EU/adAjf1fMHhE=
+go.opentelemetry.io/otel v1.38.0 h1:RkfdswUDRimDg0m2Az18RKOsnI8UDzppJAtj01/Ymk8=
+go.opentelemetry.io/otel v1.38.0/go.mod h1:zcmtmQ1+YmQM9wrNsTGV/q/uyusom3P8RxwExxkZhjM=
+go.opentelemetry.io/otel/trace v1.38.0 h1:Fxk5bKrDZJUH+AMyyIXGcFAPah0oRcT+LuNtJrmcNLE=
+go.opentelemetry.io/otel/trace v1.38.0/go.mod h1:j1P9ivuFsTceSWe1oY+EeW3sc+Pp42sO++GHkg4wwhs=
