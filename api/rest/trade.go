@@ -269,7 +269,8 @@ func (c *Trade) PlaceAlgoOrder2(req requests.PlaceAlgoOrder2) (response response
 func (c *Trade) CancelAlgoOrder(req requests.CancelAlgoOrder) (response responses.CancelAlgoOrder, err error) {
 	p := "/api/v5/trade/cancel-algos"
 	m := okex.S2M(req)
-	res, err := c.client.Do(http.MethodPost, p, true, m)
+	ms := []map[string]string{m}
+	res, err := c.client.Do(http.MethodPost, p, true, ms...)
 	if err != nil {
 		return
 	}
