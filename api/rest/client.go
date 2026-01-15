@@ -110,6 +110,40 @@ func (c *ClientRest) Do(method, path string, private bool, params ...map[string]
 	return c.client.Do(r)
 }
 
+func (c *ClientRest) DoArray(
+	method, path string,
+	private bool,
+	body any,
+) (*http.Response, error) {
+	u := fmt.Sprintf("%s%s", c.baseURL, path)
+
+	j, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+
+	r, err := http.NewRequest(method, u, bytes.NewBuffer(j))
+	if err != nil {
+		return nil, err
+	}
+
+	r.Header.Set("Content-Type", "application/json")
+
+	if private {
+		timestamp, sign := c.sign(method, path, string(j))
+		r.Header.Set("OK-ACCESS-KEY", c.apiKey)
+		r.Header.Set("OK-ACCESS-PASSPHRASE", c.passphrase)
+		r.Header.Set("OK-ACCESS-SIGN", sign)
+		r.Header.Set("OK-ACCESS-TIMESTAMP", timestamp)
+	}
+
+	if c.destination == okex.DemoServer {
+		r.Header.Set("x-simulated-trading", "1")
+	}
+
+	return c.client.Do(r)
+}
+
 func (c *ClientRest) DoJSON(method, path string, private bool, body any) (*http.Response, error) {
 
 	u := fmt.Sprintf("%s%s", c.baseURL, path)
